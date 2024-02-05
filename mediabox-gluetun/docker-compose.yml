@@ -1,7 +1,7 @@
 version: '3'
 services:
   gluetun:
-    image: qmcgaw/gluetun
+    image: docker.io/qmcgaw/gluetun
     container_name: gluetun
     cap_add:
       - NET_ADMIN
@@ -21,7 +21,7 @@ services:
       - VPN_TYPE=wireguard
       - WIREGUARD_PRIVATE_KEY=${WIREGUARD_PRIVATE_KEY}
       - WIREGUARD_ADDRESSES=10.14.0.2/16
-      - SERVER_COUNTRIES=Singapore,United States
+      - SERVER_COUNTRIES=Singapore
       - TZ=Asia/Singapore
 
   qbittorrent:
