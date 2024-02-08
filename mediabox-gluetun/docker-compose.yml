@@ -3,6 +3,7 @@ services:
   gluetun:
     image: docker.io/qmcgaw/gluetun
     container_name: gluetun
+    privileged: true
     cap_add:
       - NET_ADMIN
     devices:
@@ -15,7 +16,7 @@ services:
       - 6881:6881 # qBittorrent
       - 6881:6881/udp # qBittorrent
     volumes:
-      - ./gluetun:/gluetun
+      - ./gluetun:/gluetun:z
     environment:
       - VPN_SERVICE_PROVIDER=surfshark
       - VPN_TYPE=wireguard
@@ -34,8 +35,8 @@ services:
       - TZ=Asia/Singapore
       - WEBUI_PORT=8080
     volumes:
-      - ./qbittorrent:/config
-      - ./mediaboxdata:/downloads
+      - ./qbittorrent:/config:z
+      - ./mediaboxdata:/downloads:z
     restart: unless-stopped
 
   jellyfin:
@@ -46,8 +47,8 @@ services:
       - PGID=1000
       - TZ=Asia/Singapore
     volumes:
-      - ./jellyfin:/config
-      - ./mediaboxdata:/data/mediaboxdata
+      - ./jellyfin:/config:z
+      - ./mediaboxdata:/data/mediaboxdata:z
     ports:
       - 8096:8096
       - 8920:8920 #optional
